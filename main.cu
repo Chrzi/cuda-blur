@@ -8,7 +8,7 @@ using namespace cv;
 
 #define KERNEL_SIZE 5
 #define SIGMA 2.0
-#define GUI
+//#define GUI
 
 #define errCheck(ans) { gpuAssert((ans), __FILE__, __LINE__); }
 
@@ -141,9 +141,9 @@ int main(int argc, char **argv) {
 #ifdef GUI
     displayImage("Original", image8);
     displayImage("Output", outputImg);
-    displayImage("Original Blue", inputSplit[0]);
-    displayImage("Original Green", inputSplit[1]);
-    displayImage("Original Red", inputSplit[2]);
+//    displayImage("Original Blue", inputSplit[0]);
+//    displayImage("Original Green", inputSplit[1]);
+//    displayImage("Original Red", inputSplit[2]);
     waitKey(0);
 #endif
 
