@@ -10,15 +10,15 @@ __global__ void Gaussian(const unsigned char *input, unsigned char *output, cons
     unsigned int row = threadIdx.y + blockIdx.y * blockDim.y;
 
     if (row < height && col < width) {
-        const int half = kernelWidth / 2;
+        int radius = kernelWidth / 2;
         float sum = 0.0;
-        for (int i = -half; i <= half; i++) {
-            for (int j = -half; j <= half; j++) {
+        for (int i = -radius; i <= radius; i++) {
+            for (int j = -radius; j <= radius; j++) {
 
                 unsigned int y = max(0, min(height - 1, row + i));
                 unsigned int x = max(0, min(width - 1, col + j));
 
-                float weight = kernel[(j + half) + (i + half) * kernelWidth];
+                float weight = kernel[(j + radius) + (i + radius) * kernelWidth];
                 sum += weight * input[x + y * width];
             }
         }
