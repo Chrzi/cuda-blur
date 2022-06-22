@@ -92,8 +92,8 @@ int main(int argc, char **argv) {
 
     dim3 threadsPerBlock(16, 16);
     dim3 numBlocks(
-            width / threadsPerBlock.x,
-            height / threadsPerBlock.y
+            (width / threadsPerBlock.x) + 1,
+            (height / threadsPerBlock.y) + 1
     );
 
     //init 3 streams
@@ -114,7 +114,7 @@ int main(int argc, char **argv) {
         ));
 
         //call kernel
-        Gaussian<<<numBlocks, threadsPerBlock, 0, streams[0]>>>(
+        Gaussian<<<numBlocks, threadsPerBlock, 0, streams[i]>>>(
                 inputChannels[i], outputChannels[i], width, height, kernelGPU, KERNEL_SIZE);
     }
     errCheck(cudaDeviceSynchronize());
